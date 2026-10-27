@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;//敌人预制体
     public Transform[] waypoints; // 路点数组
-    public Transform spawner;//敌人出生点
+    public Transform spawnPoint;//敌人出生点
     public int enemyCount = 5; // 敌人数量
     public float spawnInterval = 2f; // 敌人生成间隔
 
@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        GameObject go=Instantiate(enemyPrefab, spawner.position, Quaternion.identity);//下面这几句代码是什么作用？？？
+        GameObject go=Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);//下面这几句代码是什么作用？？？
         Enemy enemy=go.GetComponent<Enemy>();
         enemy.waypoints=waypoints;
         enemyCount--;

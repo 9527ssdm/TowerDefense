@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
     private float enemyCurrentHealth; // 敌人的当前血量
     private bool hasReachedEnd = false; // 防止重复扣血
 
+    public int rewardMoney = 10;
+    private bool isDead = false;
+
     private int index = 0;
 
     private void Start()
@@ -48,10 +51,13 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isDead) return;          // 防止多个子弹同时打死时重复加钱
         enemyCurrentHealth -= damage;
         Debug.Log("敌人血量: " + enemyCurrentHealth);
         if (enemyCurrentHealth <= 0)
         {
+            isDead = true;
+            GameManager.Instance.AddMoney(rewardMoney);
             Destroy(gameObject);
         }
     }

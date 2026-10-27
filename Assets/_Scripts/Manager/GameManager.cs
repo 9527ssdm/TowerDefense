@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public int PlayerHealth = 100;
+    public int playerMoney = 100;
+
+    
 
     private void Awake()
     {
@@ -23,5 +26,20 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("GameOve");
         }
+    }
+
+    public bool SendMoney(int amount)
+    {
+        if (playerMoney < amount)
+        {
+            return false;
+        }
+        playerMoney -= amount;
+        return true;
+    }
+
+    public void AddMoney(int amount)
+    {
+        playerMoney += amount;
     }
 }
