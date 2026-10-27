@@ -1,0 +1,72 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WaveManager : MonoBehaviour
+{
+    [System.Serializable]
+    public class Wave
+    {
+        public int enemyCount=5; // 敌人数量
+        public float spawnInterval=1.0f; // 敌人生成间隔
+        public float nextWaveDelay = 3f; // 打完这波，等几秒下一波
+    }
+
+    public Wave[] waves; // 所有波次
+    public GameObject enemyPrefab; // 敌人预制体
+    public Transform[] wayPoints;//路径点
+    public Transform spawnPoint;//敌人生成点
+
+    private void Start()
+    {
+        // 开始波次生成协程
+        StartCoroutine(RunWaves());
+    }
+
+    IEnumerator RunWaves()
+    {
+        for (int w = 0; w < waves.Length; w++)
+        {
+            Debug.Log($"===== 第 {w + 1} 波开始 =====");
+            // 生成这一波的所有敌人
+            for (int i = 0; i < waves[w].enemyCount; i++)
+            {
+                SpawnEnemy();
+                // 等待一段时间再生成下一个敌人
+                yield return new WaitForSeconds(waves[w].spawnInterval);
+            }
+
+            // 等待这一波的敌人被消灭
+            while (FindObjectsOfType<Enemy>().Length > 0)
+            {
+                yield return null;   // 每帧检查一次
+            }
+            Debug.Log($"===== 第 {w + 1} 波清空 =====");
+
+            // 最后一波不用再等
+            if (w < waves.Length - 1)
+            {
+                Debug.Log($"{waves[w].nextWaveDelay} 秒后下一波");
+                // 等待下一波的时间
+                yield return new WaitForSeconds(waves[w].nextWaveDelay);
+            }
+        }
+        Debug.Log("===== 全部波次完成，胜利！ =====");
+        GameManager.Instance.Victory();
+    }
+
+    void SpawnEnemy()
+    {
+        // 如果游戏结束了，就不再生成敌人
+        if (GameManager.Instance.isGameOver)
+        {
+            return;
+        }
+        //创建敌人实例，并设置其路径点
+        GameObject go = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+        // 获取敌人脚本组件，并设置路径点
+        Enemy e = go.GetComponent<Enemy>();
+        //设置敌人的路径点
+        e.waypoints = wayPoints;
+    }
+}
