@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform[] waypoints;   // 把 5 个路点拖进来
+    // 把路点拖进来
+    public Transform[] waypoints;
+    //敌人移动速度
     public float speed = 2f;
-    public float arriveThreshold = 0.1f; // 到达判定距离
-
-    public int damageToPlayer = 10; // 敌人造成的伤害值
-    public float enemyMaxHealth = 100.0f; // 敌人的血量
-    private float enemyCurrentHealth; // 敌人的当前血量
-    private bool hasReachedEnd = false; // 防止重复扣血
-
+    // 敌人与路点的距离小于这个值就算到达路点
+    public float arriveThreshold = 0.1f;
+    // 敌人造成的伤害值
+    public int damageToPlayer = 10;
+    // 敌人的血量
+    public float enemyMaxHealth = 100.0f;
+    // 敌人的当前血量
+    private float enemyCurrentHealth;
+    // 敌人是否到达终点
+    private bool hasReachedEnd = false; 
+    // 敌人被击杀后奖励的金钱
     public int rewardMoney = 10;
+    //敌人死亡标记
     private bool isDead = false;
-
+    // 当前要去的路点索引
     private int index = 0;
 
     private void Start()
     {
-        enemyCurrentHealth = enemyMaxHealth; // 初始化敌人的血量
+        // 初始化敌人的血量
+        enemyCurrentHealth = enemyMaxHealth; 
     }
     void Update()
     {
@@ -29,20 +37,20 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        // 1. 所有路点都走完了，停住
+        // 所有路点都走完了，停住
         if (index >= waypoints.Length)
         {
             ReachEnd();
             return;
         }
 
-        // 2. 当前要去的路点
+        // 当前要去的路点
         Vector3 target = waypoints[index].position;
 
-        // 3. 朝目标移动：速度 × 帧间隔，保证帧率无关
+        // 朝目标路点移动：速度 × 帧间隔，保证帧率无关
         transform.position = Vector3.MoveTowards(transform.position,target,speed * Time.deltaTime);
 
-        // 4. 到了就换下一个
+        // 到了一个路点就换下一个
         if (Vector3.Distance(transform.position, target) < arriveThreshold)
         {
             index++;
@@ -68,9 +76,9 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-
-        hasReachedEnd = true; // 标记已经到达终点，防止重复扣血
-
+        // 标记已经到达终点，防止重复扣血
+        hasReachedEnd = true; 
+        //如果到达终点对玩家造成伤害
         GameManager.Instance.PlayerTakeDamage(damageToPlayer);
 
         Destroy(gameObject);
