@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    public static WaveManager Instance;
     [System.Serializable]
     public class Wave
     {
@@ -16,7 +17,15 @@ public class WaveManager : MonoBehaviour
     public GameObject enemyPrefab; // 敌人预制体
     public Transform[] wayPoints;//路径点
     public Transform spawnPoint;//敌人生成点
+    public int TotalWaves => waves.Length;// 总波数
 
+    private int currentWave = 0;// 当前波次索引，从 0 开始
+    public int CurrentWave => currentWave + 1;   // 从 1 开始
+
+    void Awake() 
+    { 
+        Instance = this; 
+    }
     private void Start()
     {
         // 开始波次生成协程
@@ -27,6 +36,7 @@ public class WaveManager : MonoBehaviour
     {
         for (int w = 0; w < waves.Length; w++)
         {
+            currentWave = w;
             Debug.Log($"===== 第 {w + 1} 波开始 =====");
             // 生成这一波的所有敌人
             for (int i = 0; i < waves[w].enemyCount; i++)

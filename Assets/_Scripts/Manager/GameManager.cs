@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     // 单例模式
     public static GameManager Instance;
     // 玩家血量
-    public int PlayerHealth = 100;
+    public int playerHealth = 100;
     // 玩家金钱
     public int playerMoney = 100;
 
@@ -92,12 +92,12 @@ public class GameManager : MonoBehaviour
     public void PlayerTakeDamage(int damage)
     {
         // 玩家受到伤害
-        PlayerHealth -= damage;
+        playerHealth -= damage;
         // 确保血量不会低于 0
-        PlayerHealth = Mathf.Max(PlayerHealth, 0); 
-        Debug.Log("玩家血量: " + PlayerHealth);
+        playerHealth = Mathf.Max(playerHealth, 0); 
+        Debug.Log("玩家血量: " + playerHealth);
 
-        if(PlayerHealth <= 0)
+        if(playerHealth <= 0)
         {
             Defeat();
             Debug.Log("GameOver");
