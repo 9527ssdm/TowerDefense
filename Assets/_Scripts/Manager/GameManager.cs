@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     // 玩家血量
     public int playerHealth = 100;
     // 玩家金钱
-    public int playerMoney = 100;
+    public int playerMoney = 50;
 
     private bool isAccelerated = false; // 是否加速
     // 游戏是否已结束
@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(!isGameOver)
+        
+        if (!isGameOver)
         {
             if (isAccelerated)
             {
@@ -41,8 +42,13 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f; // 正常速度
             }
         }
-       
-            //按R键重新开始游戏
+
+        // Esc 退出游戏
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuitGame();
+        }
+        //按R键重新开始游戏
         if (Input.GetKeyDown(KeyCode.R)&&isGameOver)
         {
             Time.timeScale = 1f; // 恢复时间流逝
@@ -134,5 +140,14 @@ public class GameManager : MonoBehaviour
     {
         // 玩家获得金钱
         playerMoney += amount;
+    }
+
+    void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;   // 编辑器里停止运行，方便测试
+#else
+    Application.Quit();                                 // 打包后真正退出
+#endif
     }
 }
