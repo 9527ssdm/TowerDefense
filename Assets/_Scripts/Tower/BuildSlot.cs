@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class BuildSlot : MonoBehaviour
 {
+    private AudioSource buildSource;
+    public AudioClip buildAudio;
     // 防御塔预制体
     public GameObject towerPrefab;
     // 防御塔价格
     public int towerCost = 20;
     // 是否已建造防御塔
     private bool occupied = false;
+
+    private void Awake()
+    {
+        buildSource = GetComponent<AudioSource>();
+    }
 
     void OnMouseDown()
     {
@@ -26,6 +33,11 @@ public class BuildSlot : MonoBehaviour
         }
         // 在建造位置生成防御塔
         Instantiate(towerPrefab, transform.position, Quaternion.identity);
+
+        if(buildAudio!=null)
+        {
+            buildSource.PlayOneShot(buildAudio);
+        }
         //表示该位置已经建造了防御塔
         occupied = true;
         Debug.Log("建造成功，剩余金币: " + GameManager.Instance.playerMoney);

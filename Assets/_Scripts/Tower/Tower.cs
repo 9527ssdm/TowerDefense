@@ -15,6 +15,14 @@ public class Tower : MonoBehaviour
     // 计时器
     private float timer = 0f;
 
+    public AudioClip shootSound;
+    private AudioSource audioSource;
+
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         // 更新计时器
@@ -51,9 +59,12 @@ public class Tower : MonoBehaviour
             //判断是否是敌人
             Enemy e = hit.GetComponent<Enemy>();
             //如果不是敌人，继续下一个
-            if (e == null) continue;
-            //计算敌人和塔的距离
-            float d = Vector2.Distance(transform.position, e.transform.position);
+            if (e == null)
+            {
+                continue;
+            }
+                //计算敌人和塔的距离
+                float d = Vector2.Distance(transform.position, e.transform.position);
             //如果距离小于最小距离，更新最近的敌人和最小距离
             if (d < minDist)
             {
@@ -67,6 +78,11 @@ public class Tower : MonoBehaviour
 
     void Fire(Enemy target)
     {
+
+        if(audioSource != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
         // 实例化子弹预制体
         GameObject go = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         // 获取子弹脚本，设置目标和伤害

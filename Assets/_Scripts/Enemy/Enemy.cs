@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private SpriteRenderer sr;
+    private Color originalColor;
+
     // 把路点拖进来
     public Transform[] waypoints;
     //敌人移动速度
@@ -25,10 +28,18 @@ public class Enemy : MonoBehaviour
     // 当前要去的路点索引
     private int index = 0;
 
+    public AudioClip hitSound;//敌人受伤音效
+    public AudioClip deathSound;//敌人死亡音效
+    private AudioSource audioSource;
+
     private void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
         // 初始化敌人的血量
-        enemyCurrentHealth = enemyMaxHealth; 
+        enemyCurrentHealth = enemyMaxHealth;
+        // 获取 AudioSource 组件
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -57,6 +68,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void ResetColor()
+    {
+        sr.color = originalColor;
+    }
+    void Flash()
+    {
+        sr.color = Color.red;
+        Invoke(nameof(ResetColor), 0.05f);
+    }
+
+
     public void TakeDamage(float damage)
     {
         if (isDead) return;          // 防止多个子弹同时打死时重复加钱
@@ -65,8 +87,17 @@ public class Enemy : MonoBehaviour
         if (enemyCurrentHealth <= 0)
         {
             isDead = true;
+            GameManager.Instance.PlaySfx(deathSound);
             GameManager.Instance.AddMoney(rewardMoney);
             Destroy(gameObject);
+        }
+        else
+        {
+            if (hitSound != null)
+            {
+                audioSource.PlayOneShot(hitSound);
+            }
+            Flash();   // ← 加这行
         }
     }
 

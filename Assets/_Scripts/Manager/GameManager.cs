@@ -17,24 +17,31 @@ public class GameManager : MonoBehaviour
     // 游戏是否已结束
     public bool isGameOver = false;
     // 拖入 UI Text，显示结果
-    public Text resultText;           
+    public Text resultText;
+
+    public AudioSource sfxSource;
 
     private void Awake()
     {
         // 如果已经有一个实例存在，并且不是当前对象，则销毁当前对象
         Instance = this;
+        sfxSource = GetComponent<AudioSource>();   // 自动拿身上的 AudioSource
     }
 
     private void Update()
     {
-        if (isAccelerated)
+        if(!isGameOver)
         {
-            Time.timeScale = 4f; // 加速游戏
+            if (isAccelerated)
+            {
+                Time.timeScale = 4f; // 加速游戏
+            }
+            else
+            {
+                Time.timeScale = 1f; // 正常速度
+            }
         }
-        else
-        {
-            Time.timeScale = 1f; // 正常速度
-        }
+       
             //按R键重新开始游戏
         if (Input.GetKeyDown(KeyCode.R)&&isGameOver)
         {
@@ -55,6 +62,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlaySfx(AudioClip clip)
+    {
+        if (clip != null && sfxSource != null)
+        {
+            sfxSource.PlayOneShot(clip);
+        }
+    }
     public void Defeat()
     {
         if(isGameOver)
