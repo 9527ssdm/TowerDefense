@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    // 攻击范围
-    public float range = 3f;
-    // 攻击间隔
-    public float attackInterval = 1f;
-    // 攻击力
-    public float damage = 20f;
-    // 子弹预制体
-    public GameObject projectilePrefab;
+
+    public TowerData data;
     // 计时器
     private float timer = 0f;
+    public GameObject bulletPrefa;
 
     public AudioClip shootSound;
     private AudioSource audioSource;
@@ -28,7 +23,7 @@ public class Tower : MonoBehaviour
         // 更新计时器
         timer += Time.deltaTime;
         //如果计时器小于攻击间隔，说明还没到攻击时间，直接返回
-        if (timer < attackInterval)
+        if (timer < data.attackInterval)
         {
             return;
         }
@@ -48,7 +43,7 @@ public class Tower : MonoBehaviour
     Enemy FindTarget()
     {
         // 获取攻击范围内的所有敌人
-        Collider2D[] hits=Physics2D.OverlapCircleAll(transform.position, range);
+        Collider2D[] hits=Physics2D.OverlapCircleAll(transform.position, data.range);
         //最近的敌人
         Enemy nearest = null;
         // 最小距离
@@ -84,18 +79,18 @@ public class Tower : MonoBehaviour
             audioSource.PlayOneShot(shootSound);
         }
         // 实例化子弹预制体
-        GameObject go = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject go = Instantiate(bulletPrefa, transform.position, Quaternion.identity);
         // 获取子弹脚本，设置目标和伤害
         Projectile p = go.GetComponent<Projectile>();
         //设置目标和伤害
-        p.SetTarget(target, damage);
+        p.SetTarget(target, data.damage);
     }
 
     // 在 Scene 视图画出攻击范围，调试神器
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position, data.range);
     }
 
 }

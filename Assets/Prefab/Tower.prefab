@@ -98,10 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e4767efb26d7b4ab06575a0dd5c342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 3
-  attackInterval: 1
-  damage: 20
-  projectilePrefab: {fileID: 7263974665019980623, guid: 56773d63873cabb43b1b50dee136c97c, type: 3}
+  data: {fileID: 11400000, guid: c53bbcc1d9f13fe41b617b7e80ecfd0b, type: 2}
+  bulletPrefa: {fileID: 7263974665019980623, guid: 56773d63873cabb43b1b50dee136c97c, type: 3}
   shootSound: {fileID: 8300000, guid: 60b3dac4dc26d7e4f830e8b8475f58ee, type: 3}
 --- !u!82 &355962021437226087
 AudioSource:

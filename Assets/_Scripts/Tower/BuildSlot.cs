@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class BuildSlot : MonoBehaviour
 {
+    public TowerData towerData;
     private AudioSource buildSource;
     public AudioClip buildAudio;
-    // 防御塔预制体
-    public GameObject towerPrefab;
-    // 防御塔价格
-    public int towerCost = 20;
     // 是否已建造防御塔
     private bool occupied = false;
 
@@ -26,13 +23,13 @@ public class BuildSlot : MonoBehaviour
             return;
         }
         // 检查玩家是否有足够的金币
-        if (!GameManager.Instance.SendMoney(towerCost))
+        if (!GameManager.Instance.SendMoney(towerData.cost))
         {
             Debug.Log("金币不足，无法建造防御塔");
             return;
         }
         // 在建造位置生成防御塔
-        Instantiate(towerPrefab, transform.position, Quaternion.identity);
+        Instantiate(towerData.prefab, transform.position, Quaternion.identity);
 
         if(buildAudio!=null)
         {

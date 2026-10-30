@@ -4,25 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public EnemyData data;
     private SpriteRenderer sr;
     private Color originalColor;
 
     // 把路点拖进来
     public Transform[] waypoints;
-    //敌人移动速度
-    public float speed = 2f;
     // 敌人与路点的距离小于这个值就算到达路点
     public float arriveThreshold = 0.1f;
-    // 敌人造成的伤害值
-    public int damageToPlayer = 10;
-    // 敌人的血量
-    public float enemyMaxHealth = 100.0f;
     // 敌人的当前血量
     private float enemyCurrentHealth;
     // 敌人是否到达终点
     private bool hasReachedEnd = false; 
-    // 敌人被击杀后奖励的金钱
-    public int rewardMoney = 10;
     //敌人死亡标记
     private bool isDead = false;
     // 当前要去的路点索引
@@ -37,7 +30,7 @@ public class Enemy : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
         // 初始化敌人的血量
-        enemyCurrentHealth = enemyMaxHealth;
+        enemyCurrentHealth = data.maxHealth;
         // 获取 AudioSource 组件
         audioSource = GetComponent<AudioSource>();
     }
@@ -59,7 +52,7 @@ public class Enemy : MonoBehaviour
         Vector3 target = waypoints[index].position;
 
         // 朝目标路点移动：速度 × 帧间隔，保证帧率无关
-        transform.position = Vector3.MoveTowards(transform.position,target,speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position,target,data.speed * Time.deltaTime);
 
         // 到了一个路点就换下一个
         if (Vector3.Distance(transform.position, target) < arriveThreshold)
@@ -88,7 +81,7 @@ public class Enemy : MonoBehaviour
         {
             isDead = true;
             GameManager.Instance.PlaySfx(deathSound);
-            GameManager.Instance.AddMoney(rewardMoney);
+            GameManager.Instance.AddMoney(data.rewardMoney);
             Destroy(gameObject);
         }
         else
@@ -110,7 +103,7 @@ public class Enemy : MonoBehaviour
         // 标记已经到达终点，防止重复扣血
         hasReachedEnd = true; 
         //如果到达终点对玩家造成伤害
-        GameManager.Instance.PlayerTakeDamage(damageToPlayer);
+        GameManager.Instance.PlayerTakeDamage(data.damageToPlayer);
 
         Destroy(gameObject);
 
