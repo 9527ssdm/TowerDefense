@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81830f94c191c7f4c975c865ce6c6f19, type: 3}
   m_Name: Tower_Basic
   m_EditorClassIdentifier: 
+  slowMultiplier: 0.5
+  slowDuration: 2
   towerName: "\u5355\u4F53\u5854"
-  prefab: {fileID: 0}
+  prefab: {fileID: 5541593386076609623, guid: bb56e079deee0cc4c9dec459a368e4f1, type: 3}
   damage: 20
   range: 3
   attackInterval: 1

@@ -7,7 +7,8 @@ public class Enemy : MonoBehaviour
     public EnemyData data;
     private SpriteRenderer sr;
     private Color originalColor;
-
+    private float speedMultiplier = 1f;
+    private float slowTimer = 0f;
     // 把路点拖进来
     public Transform[] waypoints;
     // 敌人与路点的距离小于这个值就算到达路点
@@ -37,7 +38,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (hasReachedEnd)
-        { 
+        {
             return;
         }
 
@@ -48,11 +49,20 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        if (slowTimer > 0)
+        {
+            slowTimer -= Time.deltaTime;
+            if (slowTimer <= 0)
+            {
+                speedMultiplier = 1f;
+
+            }
+        }
         // 当前要去的路点
         Vector3 target = waypoints[index].position;
 
         // 朝目标路点移动：速度 × 帧间隔，保证帧率无关
-        transform.position = Vector3.MoveTowards(transform.position,target,data.speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, data.speed * speedMultiplier * Time.deltaTime);
 
         // 到了一个路点就换下一个
         if (Vector3.Distance(transform.position, target) < arriveThreshold)
@@ -61,6 +71,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void ApplySlow(float multiplier, float duration)
+    {
+        speedMultiplier = multiplier;
+        slowTimer = Mathf.Max(slowTimer, duration);   // 取更长的持续时间
+    }
     void ResetColor()
     {
         sr.color = originalColor;

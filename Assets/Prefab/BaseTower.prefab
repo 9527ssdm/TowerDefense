@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6764991268928572718}
   - component: {fileID: 355962021437226087}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: BaseTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,8 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: c53bbcc1d9f13fe41b617b7e80ecfd0b, type: 2}
-  bulletPrefa: {fileID: 7263974665019980623, guid: 56773d63873cabb43b1b50dee136c97c, type: 3}
-  shootSound: {fileID: 8300000, guid: 60b3dac4dc26d7e4f830e8b8475f58ee, type: 3}
+  bulletPrefab: {fileID: 7263974665019980623, guid: 56773d63873cabb43b1b50dee136c97c, type: 3}
 --- !u!82 &355962021437226087
 AudioSource:
   m_ObjectHideFlags: 0
