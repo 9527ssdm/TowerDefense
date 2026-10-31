@@ -37,6 +37,7 @@ public class BuildSlot : MonoBehaviour
         }
         //表示该位置已经建造了防御塔
         occupied = true;
+        GetComponent<Collider2D>().enabled = false;
         Debug.Log("建造成功，剩余金币: " + GameManager.Instance.playerMoney);
     }
 }

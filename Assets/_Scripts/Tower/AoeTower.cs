@@ -15,7 +15,7 @@ public class AoeTower : TowerBase
             Enemy e = hit.GetComponent<Enemy>();
             if (e != null)
             {
-                e.TakeDamage(data.damage);
+                e.TakeDamage(currentDamage);
                 hitAny = true;
             }
         }

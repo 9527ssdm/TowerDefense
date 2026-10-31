@@ -13,7 +13,7 @@ public class SlowTower : TowerBase
         }
 
         target.ApplySlow(data.slowMultiplier, data.slowDuration);
-        target.TakeDamage(data.damage);
+        target.TakeDamage(currentDamage);
         return true;
     }
 }

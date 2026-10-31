@@ -4,9 +4,21 @@ using UnityEngine;
 
 public abstract class TowerBase : MonoBehaviour
 {
+    public int level = 1;
+    public int maxLevel = 3;
+    public int UpgradeCost => data.cost * level;   // 升级费用随等级涨
+
     public TowerData data;
+    protected float currentDamage;   // 实例级数值，升级时改这个
+    protected float currentRange;
     protected float timer;
 
+
+    protected virtual void Start()
+    {
+        currentDamage = data.damage;
+        currentRange = data.range;
+    }
     protected virtual void Update()
     {
         timer += Time.deltaTime;
@@ -19,6 +31,32 @@ public abstract class TowerBase : MonoBehaviour
         {
             timer = 0;
         }
+    }
+
+    public void TryUpgrade()
+    {
+        if (level >= maxLevel)
+        {
+            Debug.Log("已满级");
+            return;
+        }
+
+        if (!GameManager.Instance.SendMoney(UpgradeCost))
+        {
+            Debug.Log("金币不足，升级需要 " + UpgradeCost);
+            return;
+        }
+
+        level++;
+        currentDamage *= 1.3f;
+        currentRange *= 1.1f;
+        transform.localScale *= 1.08f;   // 视觉上变大一点
+        Debug.Log($"升级到 {level} 级，伤害 {currentDamage:F0}，射程 {currentRange:F1}");
+    }
+
+    void OnMouseDown()
+    {
+        TryUpgrade();
     }
 
     //子类必须实现攻击方式

@@ -16,7 +16,7 @@ public class Tower : TowerBase
         }
 
         Instantiate(bulletPrefab, transform.position, Quaternion.identity)
-            .GetComponent<Projectile>().SetTarget(target, data.damage);
+            .GetComponent<Projectile>().SetTarget(target, currentDamage);
 
         return true;
     }
