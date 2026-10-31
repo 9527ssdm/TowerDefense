@@ -1,20 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static WaveManager;
 
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance;
+
+    [System.Serializable]
+    public class EnemySpawnEntry
+    {
+        public EnemyData enemyData;   // 哪种敌人
+        public int count = 1;         // 来几个
+    }
+
     [System.Serializable]
     public class Wave
     {
-        public int enemyCount=5; // 敌人数量
+        public EnemySpawnEntry[] entries; // 这一波由哪些敌人组成
         public float spawnInterval=1.0f; // 敌人生成间隔
         public float nextWaveDelay = 3f; // 打完这波，等几秒下一波
     }
 
     public Wave[] waves; // 所有波次
-    public GameObject enemyPrefab; // 敌人预制体
     public Transform[] wayPoints;//路径点
     public Transform spawnPoint;//敌人生成点
     public int TotalWaves => waves.Length;// 总波数
@@ -39,11 +47,13 @@ public class WaveManager : MonoBehaviour
             currentWave = w;
             Debug.Log($"===== 第 {w + 1} 波开始 =====");
             // 生成这一波的所有敌人
-            for (int i = 0; i < waves[w].enemyCount; i++)
+            foreach (EnemySpawnEntry entry in waves[w].entries)
             {
-                SpawnEnemy();
-                // 等待一段时间再生成下一个敌人
-                yield return new WaitForSeconds(waves[w].spawnInterval);
+                for (int i = 0; i < entry.count; i++)
+                {
+                    SpawnEnemy(entry.enemyData);
+                    yield return new WaitForSeconds(waves[w].spawnInterval);
+                }
             }
 
             // 等待这一波的敌人被消灭
@@ -65,7 +75,7 @@ public class WaveManager : MonoBehaviour
         GameManager.Instance.Victory();
     }
 
-    void SpawnEnemy()
+    void SpawnEnemy(EnemyData enemyData)
     {
         // 如果游戏结束了，就不再生成敌人
         if (GameManager.Instance.isGameOver)
@@ -73,9 +83,11 @@ public class WaveManager : MonoBehaviour
             return;
         }
         //创建敌人实例，并设置其路径点
-        GameObject go = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+        GameObject go = Instantiate(enemyData.prefab, spawnPoint.position, Quaternion.identity);
         // 获取敌人脚本组件，并设置路径点
         Enemy e = go.GetComponent<Enemy>();
+
+        e.data= enemyData;
         //设置敌人的路径点
         e.waypoints = wayPoints;
     }

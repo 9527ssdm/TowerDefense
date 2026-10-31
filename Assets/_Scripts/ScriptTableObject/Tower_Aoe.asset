@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81830f94c191c7f4c975c865ce6c6f19, type: 3}
-  m_Name: Tower_Basic
+  m_Name: Tower_Aoe
   m_EditorClassIdentifier: 
   slowMultiplier: 0.5
   slowDuration: 2
-  towerName: "\u5355\u4F53\u5854"
-  prefab: {fileID: 5541593386076609623, guid: bb56e079deee0cc4c9dec459a368e4f1, type: 3}
-  damage: 20
+  towerName: "\u8303\u56F4\u5854"
+  prefab: {fileID: 8645150525680085060, guid: 87195df5c18445c4eb745c439c36eca1, type: 3}
+  damage: 8
   range: 3
   attackInterval: 1
-  cost: 20
-  color: {r: 0, g: 0, b: 1, a: 1}
+  cost: 25
+  color: {r: 1, g: 0.21433869, b: 0, a: 1}

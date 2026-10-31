@@ -9,15 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81830f94c191c7f4c975c865ce6c6f19, type: 3}
-  m_Name: Tower_Aoe
+  m_Script: {fileID: 11500000, guid: c5f88d6227d89174a8060b3c8e7851e1, type: 3}
+  m_Name: Enemy_Tank
   m_EditorClassIdentifier: 
-  slowMultiplier: 0.5
-  slowDuration: 2
-  towerName: "\u5355\u4F53\u5854"
-  prefab: {fileID: 0}
-  damage: 20
-  range: 3
-  attackInterval: 1
-  cost: 20
-  color: {r: 0, g: 0, b: 1, a: 1}
+  enemyName: "\u666E\u901A\u602A\u7269"
+  maxHealth: 100
+  speed: 2
+  rewardMoney: 10
+  damageToPlayer: 10
+  color: {r: 1, g: 0, b: 0, a: 1}

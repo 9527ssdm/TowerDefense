@@ -101,12 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: c9a64846b011fc249bc80fc33bc468c1, type: 2}
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  waypoints: []
   arriveThreshold: 0.1
   hitSound: {fileID: 8300000, guid: 60b3dac4dc26d7e4f830e8b8475f58ee, type: 3}
   deathSound: {fileID: 8300000, guid: 4563c3908b9dd044fa9f35ed367b697a, type: 3}

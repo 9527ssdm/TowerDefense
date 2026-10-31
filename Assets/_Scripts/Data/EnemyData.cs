@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyData :ScriptableObject
 {
     public string enemyName = "∆’Õ®π÷ŒÔ";
+    public GameObject prefab;
     public float maxHealth = 100f;
     public float speed = 2f;
     public int rewardMoney=10;
