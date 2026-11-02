@@ -89,11 +89,14 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (isDead) return;          // 防止多个子弹同时打死时重复加钱
+        if (isDead)// 防止多个子弹同时打死时重复加钱
+        {
+            return;
+        }
         enemyCurrentHealth -= damage;
-        Debug.Log("敌人血量: " + enemyCurrentHealth);
         if (enemyCurrentHealth <= 0)
         {
+            enemyCurrentHealth = 0;
             isDead = true;
             GameManager.Instance.PlaySfx(deathSound);
             GameManager.Instance.AddMoney(data.rewardMoney);
@@ -107,6 +110,7 @@ public class Enemy : MonoBehaviour
             }
             Flash();   // ← 加这行
         }
+        Debug.Log("敌人血量: " + enemyCurrentHealth);
     }
 
     void ReachEnd()

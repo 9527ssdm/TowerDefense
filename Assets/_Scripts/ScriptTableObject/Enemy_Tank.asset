@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f88d6227d89174a8060b3c8e7851e1, type: 3}
   m_Name: Enemy_Tank
   m_EditorClassIdentifier: 
-  enemyName: "\u666E\u901A\u602A\u7269"
-  maxHealth: 100
-  speed: 2
-  rewardMoney: 10
+  enemyName: "\u5766\u514B\u602A"
+  prefab: {fileID: 8384043491105825139, guid: 1fe2a7dd810bb194e91996aa66e39c57, type: 3}
+  maxHealth: 200
+  speed: 1.5
+  rewardMoney: 15
   damageToPlayer: 10
-  color: {r: 1, g: 0, b: 0, a: 1}
+  color: {r: 1, g: 0, b: 0.58823586, a: 1}

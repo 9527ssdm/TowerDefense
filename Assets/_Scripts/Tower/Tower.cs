@@ -20,4 +20,20 @@ public class Tower : TowerBase
 
         return true;
     }
+
+    void Fire(Enemy target)
+    {
+        GameObject go;
+        if (ProjectilePool.Instance != null)
+        {
+            go = ProjectilePool.Instance.Get();
+        }
+        else
+        {
+            go = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        }
+
+        go.transform.position = transform.position;   // 从池里取出的子弹要重设位置
+        go.GetComponent<Projectile>().SetTarget(target, currentDamage);
+    }
 }

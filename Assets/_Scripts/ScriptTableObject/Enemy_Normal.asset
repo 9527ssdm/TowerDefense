@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Enemy_Normal
   m_EditorClassIdentifier: 
   enemyName: "\u666E\u901A\u602A\u7269"
+  prefab: {fileID: 4567795602232114672, guid: 02034752cec0b9f4caa3cdf7e3cded79, type: 3}
   maxHealth: 100
   speed: 2
   rewardMoney: 10

@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364456000d2b70c45876adc20005c0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerData: {fileID: 11400000, guid: c53bbcc1d9f13fe41b617b7e80ecfd0b, type: 2}
+  towerData: {fileID: 11400000, guid: 30eb78b129e56d242a46b536edd231dd, type: 2}
   buildAudio: {fileID: 8300000, guid: d81f4fbca81e6e844bbe0723da2a2d04, type: 3}
 --- !u!61 &115119239
 BoxCollider2D:
@@ -988,6 +988,51 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1536567750}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &453244315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 453244317}
+  - component: {fileID: 453244316}
+  m_Layer: 0
+  m_Name: ProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &453244316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453244315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86bcb23fb65a9554f9c7ec887bcdbc88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7263974665019980623, guid: 56773d63873cabb43b1b50dee136c97c, type: 3}
+--- !u!4 &453244317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453244315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.850701, y: -0.87608075, z: -0.04586536}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &469143551
 GameObject:
@@ -1857,7 +1902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364456000d2b70c45876adc20005c0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerData: {fileID: 11400000, guid: c53bbcc1d9f13fe41b617b7e80ecfd0b, type: 2}
+  towerData: {fileID: 11400000, guid: 30eb78b129e56d242a46b536edd231dd, type: 2}
   buildAudio: {fileID: 8300000, guid: d81f4fbca81e6e844bbe0723da2a2d04, type: 3}
 --- !u!61 &975145179
 BoxCollider2D:
@@ -2768,22 +2813,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemyCount: 3
+  - entries:
+    - enemyData: {fileID: 11400000, guid: c9a64846b011fc249bc80fc33bc468c1, type: 2}
+      count: 10
     spawnInterval: 1
     nextWaveDelay: 2
-  - enemyCount: 4
+  - entries:
+    - enemyData: {fileID: 11400000, guid: c9a64846b011fc249bc80fc33bc468c1, type: 2}
+      count: 8
+    - enemyData: {fileID: 11400000, guid: 29f53594f66466e4e8a8c4b3520e02ef, type: 2}
+      count: 5
     spawnInterval: 1
     nextWaveDelay: 2
-  - enemyCount: 6
+  - entries:
+    - enemyData: {fileID: 11400000, guid: c9a64846b011fc249bc80fc33bc468c1, type: 2}
+      count: 5
+    - enemyData: {fileID: 11400000, guid: 29f53594f66466e4e8a8c4b3520e02ef, type: 2}
+      count: 6
+    - enemyData: {fileID: 11400000, guid: 6c7a1a587e5f20648aff3ec6f11ba06a, type: 2}
+      count: 4
     spawnInterval: 1
     nextWaveDelay: 3
-  - enemyCount: 7
+  - entries:
+    - enemyData: {fileID: 11400000, guid: 29f53594f66466e4e8a8c4b3520e02ef, type: 2}
+      count: 5
+    - enemyData: {fileID: 11400000, guid: 6c7a1a587e5f20648aff3ec6f11ba06a, type: 2}
+      count: 5
+    spawnInterval: 1
+    nextWaveDelay: 5
+  - entries:
+    - enemyData: {fileID: 11400000, guid: c9a64846b011fc249bc80fc33bc468c1, type: 2}
+      count: 8
+    - enemyData: {fileID: 11400000, guid: 29f53594f66466e4e8a8c4b3520e02ef, type: 2}
+      count: 8
+    - enemyData: {fileID: 11400000, guid: 6c7a1a587e5f20648aff3ec6f11ba06a, type: 2}
+      count: 7
     spawnInterval: 1
     nextWaveDelay: 3
-  - enemyCount: 5
-    spawnInterval: 1
-    nextWaveDelay: 3
-  enemyPrefab: {fileID: 4567795602232114672, guid: 02034752cec0b9f4caa3cdf7e3cded79, type: 3}
   wayPoints:
   - {fileID: 630189911}
   - {fileID: 423628140}
@@ -2939,7 +3005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364456000d2b70c45876adc20005c0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerData: {fileID: 11400000, guid: c53bbcc1d9f13fe41b617b7e80ecfd0b, type: 2}
+  towerData: {fileID: 11400000, guid: 88d66b6f0ce67044987bc51e223154f6, type: 2}
   buildAudio: {fileID: 8300000, guid: d81f4fbca81e6e844bbe0723da2a2d04, type: 3}
 --- !u!61 &1657463729
 BoxCollider2D:
@@ -3468,7 +3534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364456000d2b70c45876adc20005c0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerData: {fileID: 11400000, guid: c53bbcc1d9f13fe41b617b7e80ecfd0b, type: 2}
+  towerData: {fileID: 11400000, guid: 88d66b6f0ce67044987bc51e223154f6, type: 2}
   buildAudio: {fileID: 8300000, guid: d81f4fbca81e6e844bbe0723da2a2d04, type: 3}
 --- !u!61 &2080270249
 BoxCollider2D:
@@ -3756,3 +3822,4 @@ SceneRoots:
   - {fileID: 1586920649}
   - {fileID: 805641429}
   - {fileID: 1525819611}
+  - {fileID: 453244317}

@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
         // 目标死了/到终点了，子弹消失
         if (target == null)
         {
-            Destroy(gameObject);
+            ReturnToPool();
             return;
         }
         // 子弹朝目标移动
@@ -32,6 +32,19 @@ public class Projectile : MonoBehaviour
         if (Vector3.Distance(transform.position, target.transform.position) < 0.15f)
         {
             target.TakeDamage(damage);
+            ReturnToPool();
+        }
+    }
+
+    void ReturnToPool()
+    {
+        if (ProjectilePool.Instance != null)
+        {
+
+            ProjectilePool.Instance.Return(gameObject);
+        }
+        else
+        {
             Destroy(gameObject);
         }
     }

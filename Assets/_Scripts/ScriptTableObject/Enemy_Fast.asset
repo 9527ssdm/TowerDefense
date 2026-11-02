@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f88d6227d89174a8060b3c8e7851e1, type: 3}
   m_Name: Enemy_Fast
   m_EditorClassIdentifier: 
-  enemyName: "\u666E\u901A\u602A\u7269"
-  maxHealth: 100
-  speed: 2
+  enemyName: "\u901F\u5EA6\u602A"
+  prefab: {fileID: 877736771530316908, guid: 8549b86ff659bf74a8075a364c6e1ef6, type: 3}
+  maxHealth: 80
+  speed: 3
   rewardMoney: 10
-  damageToPlayer: 10
-  color: {r: 1, g: 0, b: 0, a: 1}
+  damageToPlayer: 5
+  color: {r: 0, g: 0.9028616, b: 1, a: 1}
