@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: "\u901F\u5EA6\u602A"
   prefab: {fileID: 877736771530316908, guid: 8549b86ff659bf74a8075a364c6e1ef6, type: 3}
-  maxHealth: 80
+  maxHealth: 100
   speed: 3
   rewardMoney: 10
   damageToPlayer: 5

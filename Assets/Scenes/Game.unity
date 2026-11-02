@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 100
-  playerMoney: 100
+  playerMoney: 80
   isGameOver: 0
   resultText: {fileID: 1545659387}
   sfxSource: {fileID: 0}
@@ -2820,34 +2820,34 @@ MonoBehaviour:
     nextWaveDelay: 2
   - entries:
     - enemyData: {fileID: 11400000, guid: c9a64846b011fc249bc80fc33bc468c1, type: 2}
-      count: 8
+      count: 10
     - enemyData: {fileID: 11400000, guid: 29f53594f66466e4e8a8c4b3520e02ef, type: 2}
-      count: 5
+      count: 10
     spawnInterval: 1
     nextWaveDelay: 2
   - entries:
     - enemyData: {fileID: 11400000, guid: c9a64846b011fc249bc80fc33bc468c1, type: 2}
-      count: 5
+      count: 10
     - enemyData: {fileID: 11400000, guid: 29f53594f66466e4e8a8c4b3520e02ef, type: 2}
-      count: 6
+      count: 10
     - enemyData: {fileID: 11400000, guid: 6c7a1a587e5f20648aff3ec6f11ba06a, type: 2}
-      count: 4
+      count: 5
     spawnInterval: 1
     nextWaveDelay: 3
   - entries:
     - enemyData: {fileID: 11400000, guid: 29f53594f66466e4e8a8c4b3520e02ef, type: 2}
-      count: 5
+      count: 10
     - enemyData: {fileID: 11400000, guid: 6c7a1a587e5f20648aff3ec6f11ba06a, type: 2}
-      count: 5
+      count: 10
     spawnInterval: 1
     nextWaveDelay: 5
   - entries:
     - enemyData: {fileID: 11400000, guid: c9a64846b011fc249bc80fc33bc468c1, type: 2}
-      count: 8
+      count: 10
     - enemyData: {fileID: 11400000, guid: 29f53594f66466e4e8a8c4b3520e02ef, type: 2}
-      count: 8
+      count: 10
     - enemyData: {fileID: 11400000, guid: 6c7a1a587e5f20648aff3ec6f11ba06a, type: 2}
-      count: 7
+      count: 10
     spawnInterval: 1
     nextWaveDelay: 3
   wayPoints:
