@@ -16,6 +16,6 @@ MonoBehaviour:
   prefab: {fileID: 8384043491105825139, guid: 1fe2a7dd810bb194e91996aa66e39c57, type: 3}
   maxHealth: 300
   speed: 1.5
-  rewardMoney: 15
+  rewardMoney: 8
   damageToPlayer: 20
   color: {r: 1, g: 0, b: 0.58823586, a: 1}

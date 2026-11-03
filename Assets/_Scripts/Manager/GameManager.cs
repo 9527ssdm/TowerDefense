@@ -16,10 +16,15 @@ public class GameManager : MonoBehaviour
     private bool isAccelerated = false; // 是否加速
     // 游戏是否已结束
     public bool isGameOver = false;
+
+    public bool isPause=false;
+    public GameObject pauseMenuUI;
     // 拖入 UI Text，显示结果
     public Text resultText;
 
     public AudioSource sfxSource;
+
+    
 
     private void Awake()
     {
@@ -31,17 +36,17 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         
-        if (!isGameOver)
-        {
-            if (isAccelerated)
-            {
-                Time.timeScale = 4f; // 加速游戏
-            }
-            else
-            {
-                Time.timeScale = 1f; // 正常速度
-            }
-        }
+        //if (!isGameOver)
+        //{
+        //    if (isAccelerated)
+        //    {
+        //        Time.timeScale = 4f; // 加速游戏
+        //    }
+        //    else
+        //    {
+        //        Time.timeScale = 1f; // 正常速度
+        //    }
+        //}
 
         // Esc 退出游戏
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -51,8 +56,7 @@ public class GameManager : MonoBehaviour
         //按R键重新开始游戏
         if (Input.GetKeyDown(KeyCode.R)&&isGameOver)
         {
-            Time.timeScale = 1f; // 恢复时间流逝
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 重新加载当前场景
+            RestartGame();
         }
 
         if(Input.GetKeyDown(KeyCode.S) && !isGameOver)
@@ -66,6 +70,51 @@ public class GameManager : MonoBehaviour
                 isAccelerated = false;
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.P)&&!isGameOver)
+        {
+            TogglePause();
+        }
+    }
+
+    public void TogglePause()
+    {
+        isPause = !isPause;
+        if (isPause)
+        {
+            Time.timeScale = 0f; // 暂停游戏
+            if (pauseMenuUI != null)
+            {
+                pauseMenuUI.SetActive(true); // 显示暂停菜单
+            }
+        }
+        else
+        {
+            Time.timeScale = 1f; // 恢复游戏
+            if (pauseMenuUI != null)
+            {
+                pauseMenuUI.SetActive(false); // 隐藏暂停菜单
+            }
+        }
+    }
+
+    public void ResumeGame()
+    {
+        isPause = false;
+        Time.timeScale = 1f;
+        if (pauseMenuUI != null) pauseMenuUI.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void PlaySfx(AudioClip clip)
@@ -75,6 +124,7 @@ public class GameManager : MonoBehaviour
             sfxSource.PlayOneShot(clip);
         }
     }
+
     public void Defeat()
     {
         if(isGameOver)
@@ -142,7 +192,7 @@ public class GameManager : MonoBehaviour
         playerMoney += amount;
     }
 
-    void QuitGame()
+   public void QuitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;   // 编辑器里停止运行，方便测试
