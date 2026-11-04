@@ -35,18 +35,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        
-        //if (!isGameOver)
-        //{
-        //    if (isAccelerated)
-        //    {
-        //        Time.timeScale = 4f; // 加速游戏
-        //    }
-        //    else
-        //    {
-        //        Time.timeScale = 1f; // 正常速度
-        //    }
-        //}
+
+        if (!isGameOver && !isPause)
+        {
+            if (isAccelerated)
+            {
+                Time.timeScale = 2f; // 加速游戏
+            }
+            else
+            {
+                Time.timeScale = 1f; // 正常速度
+            }
+        }
 
         // Esc 退出游戏
         if (Input.GetKeyDown(KeyCode.Escape))
